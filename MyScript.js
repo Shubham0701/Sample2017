@@ -1,24 +1,19 @@
 function myClick(){
 	document.getElementById("home").href="Assignment1.html";
 }
-function validateForm(){
-	var name = document.form.name;
-	var email= document.form.email;
-	var city = document.form.city;
-	var organization = document.form.organization;
-	var number = document.form.number;
-	var msg = document.form.msg;
-	if(validateName(name))
+
+/*function validateForm(){
+	if(validateName())
 	{
-		if(validateEmail(email))
+		if(validateEmail())
 		{
-			if(validateCity(city))
+			if(validateCity())
 			{
-				if(validateOrganization(organization))
+				if(validateOrganization())
 				{
-					if(validateNumber(number))
+					if(validateNumber())
 					{
-						if(validateMessage(msg))
+						if(validateMessage())
 						{
 							return true;
 						}
@@ -27,31 +22,28 @@ function validateForm(){
 			}
 		}
 	}
-	return false;
+	return false; //onsubmit="return validateForm();"
 }
+*/
 function validateName(name)
 {
+	var name = document.form.name;
 	var len = name.value.length;
-	var letters = /^[A-Za-z]+$/;
-	if(name.value.match(letters)){
+	var letters = /^[A-Za-z ]+$/;
+	if( name.value.match(letters)  && len >1  && len<=20 ){
 		return true;
 	}	
-	else{
-		alert("Name should have only charachters");
-		return false;
-	}
-	if(len < 1 || len > 20)
-	{
-		alert("Name should have 1 to 20 charachters");
-		return false;
-	}
 	else
 	{
-		return true;
+		name.value="";
+		alert("Name should have 1 to 20 charachters");
+		name.focus();
+		return false;
 	}
 }
-function validateEmail(email)
+function validateEmail()
 {
+	var email= document.form.email;
 	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
 	if(email.value.match(mailformat) )
 	{
@@ -59,54 +51,78 @@ function validateEmail(email)
 	}
 	else
 	{
+		email.value="";
 		alert("Enter a valid email address");
+		email.focus();
 		return false;
 	}
 }
-function validateOrganization(organization)
+function validateOrganization()
 {
+	var organization = document.form.organization;
 	var letters = /^[A-Za-z]+$/;
 	if(organization.value.match(letters)){
 		return true;
 	}	
 	else{
+		organization.value="";
 		alert("organization name should have only charachters");
+		organization.focus();
 		return false;
 	}
 }
-function validateNumber(number)
+function validateNumber()
 {
+	var num = document.form.num;
 	var numbers = /^[0-9]+$/;  
-	if(number.value.length == 0 || number.value.length > 10) 
-	{
-		alert("enter a valid number from 1 to 10 digits for contact numbers");
-		return false;
-	}
-	if(number.value.match(numbers))
+	var len = num.value.length;
+	if(num.value.match(numbers) && len==10 )
 	{
 		return true;
 	}
 	else
 	{
-		alert("Only numbers can be entered for contact numbers");
+		num.value="";
+		alert("Enter a valid number of 10 digits for contact numbers");
+		num.focus();
 		return false;
 	}
 }
-function validateMessage(msg)
+function validateMessage()
 {
+	var msg = document.form.msg;
 	if(msg.value.length > 250 || msg.value.length == 0)
 	{
+		msg.value="";
 		alert("Enter 1 to 250 charachters for message");
+		msg.focus();
 		return false;
 	}
 	return true;
 }
-function validateCity(city)
+function validateCity()
 {
-	if(city.value == -1)
+	var city = document.form.city;
+	if(city.value ==  "")
 	{
 		alert("Select a city from drop down list");
 		return false;
 	}
 	return true;
+}
+
+function checkForm(){
+	var arr = document.forms["form"].elements;
+	var canSubmit = true;
+	for ( var index = 0; index < arr.length ; index ++)
+	{
+		if(arr[index].value.length == 0)
+		{
+			canSubmit=false;
+		}
+	}
+	if(canSubmit)
+	{
+		document.form.submit.disabled = false;
+	}
 }
