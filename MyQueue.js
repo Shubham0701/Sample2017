@@ -1,4 +1,4 @@
-var arr= new Array();
+var arr= [];
 var rear=-1;
 var front=0;
 function getQueue(){
