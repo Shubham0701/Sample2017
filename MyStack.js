@@ -1,20 +1,46 @@
-var arr = [];
-var topVal=-1;
-function pushItem(){
-	var input = document.getElementById("push").value;
-	document.getElementById("push").value="";
-	arr[++topVal] = input;
-	console.log(arr[topVal] + " " + topVal);
+function Node(data){
+	this.data = data;
+	this.prev=null;
 }
 
-function popItem(){
-	document.getElementById("spanPop").innerHTML = arr[topVal--];
-	console.log(topVal);
-}
+var stack = new MyStack();
 
-function printStack(){
-	document.getElementById("spanStack").innerHTML="";
-	for(var index=0;index <= topVal ; index++){
-		document.getElementById("spanStack").innerHTML += arr[index] + " ";
+ function MyStack(){
+		this.top=null;
+		var temp,data;
+	
+	MyStack.prototype.pushItem = function(){
+		data = document.getElementById("push").value;
+		document.getElementById("push").value = "";
+		var node = new Node(data);
+		node.prev = this.top;
+		this.top=node;
+	}	
+	
+	MyStack.prototype.popItem = function(){
+		document.getElementById("spanPop").innerHTML = "";
+		document.getElementById("spanPop").innerHTML = this.top.data;
+		this.top=this.top.prev;
 	}
-}
+ 
+	MyStack.prototype.printStack = function(){
+		temp = this.top;
+		document.getElementById("spanStack").innerHTML="";
+		while(temp!=null){
+			document.getElementById("spanStack").innerHTML += temp.data + " ";
+			temp=temp.prev;
+		}
+	}
+ }
+ 
+ function pushVal(){
+	stack.pushItem();
+ }
+ 
+ function popVal(){
+	stack.popItem();
+ }
+ 
+ function printVal(){
+	stack.printStack();
+ }
