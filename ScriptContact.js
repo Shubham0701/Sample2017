@@ -6,33 +6,26 @@ function toContact(){
 	window.location.href="Assignment2.html";
 }
 
-function removeLocal(){
-	localStorage.removeItem("key1");
-	localStorage.removeItem("key2");
-	localStorage.removeItem("key3");
-	localStorage.removeItem("key4");
-	localStorage.removeItem("key5");
-	localStorage.removeItem("key6");
-	//localStorage.clear();
+function removeLoc(){
+	localStorage.clear();
 }
 
-function saveLocal(){ 
-	
-	document.form.name.value=localStorage.getItem("key1");
-	document.form.email.value=localStorage.getItem("key2");
-	document.form.city.value=localStorage.getItem("key3");
-	document.form.organization.value=localStorage.getItem("key4");
-	document.form.num.value=localStorage.getItem("key5");
-	document.form.msg.value=localStorage.getItem("key6");
-}
 
 function validateForm(){
 	if(validateName() && validateEmail() && validateCity() && validateOrganization() && validateNumber() && validateMessage())
 	{
+		document.form.name.value="";
+		document.form.email.value="";
+		document.form.organization.value="";
+		document.form.city.value="";
+		document.getElementById("val").hidden = true;
+		document.form.msg.value="";
+		document.form.num.value="";
 		return true;	
 	}
 	return false;
 }
+
 function validateName()
 {
 	var name = document.form.name;
@@ -147,4 +140,13 @@ function fillField(city)
 	var name = city.value;
 	document.form.cityname.hidden = false;   
 	document.form.cityname.value = "Selected city is :" + name;
+}
+
+window.onload =function(){
+	document.form.name.value=localStorage.getItem("key1");
+	document.form.email.value=localStorage.getItem("key2");
+	document.form.city.value=localStorage.getItem("key3");
+	document.form.organization.value=localStorage.getItem("key4");
+	document.form.num.value=localStorage.getItem("key5");
+	document.form.msg.value=localStorage.getItem("key6");
 }

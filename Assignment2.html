@@ -32,7 +32,7 @@
 
 
 <table align="center" cellspacing="20px">
-<form name="form" onsubmit="return validateForm()"> 
+<form name="form" > 
 <tr>
 	<td >Name<sup>*</sup> : </td> 
 	<td ><input  onchange="return validateName()" placeholder="Name" type="text" name="name" ></td>
@@ -76,9 +76,8 @@
 </tr>
 
 <tr>
-	<td><input type="submit" name="submit" value="Submit" onclick="saveLocal()"/></td>
-	<td><input type="button" name="getLocal" value="Get Local Storage" onclick="saveLocal()"/></td>
-	<td><input type="button" name="removeLocal" value="Clear Local Storage" onclick="removeLocal()"/></td>
+	<td><input type="button" name="submit" value="Submit"  onclick="validateForm()"/></td>
+	<td><input type="button" name="remove" value="Clear Local Storage" onclick="removeLoc()"/></td>
 </tr>
 </form>
 </table>
